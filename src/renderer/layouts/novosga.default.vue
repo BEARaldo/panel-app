@@ -5,6 +5,13 @@
         <header class="column">
           <featured :message="lastMessage" v-if="lastMessage" :fontColor="color('featuredFontColor', 'pageFontColor')"></featured>
         </header>
+        <!--        Tentativa de inserção do anuncio-->
+        <div class="column is-full anuncio-ascom">
+            <h3 :style="{ 'color': color('pageFontColor') }">Anúncios</h3>
+
+            <img :src="AscomURL" alt="Espaço Ascom" class="imagem-anuncio">
+        </div>
+<!--        -->
         <footer class="column" :style="{ 'background-color': color('footerBgColor'), 'color': color('footerFontColor') }">
           <img :src="logoUrl" class="is-pulled-left">
           <h1 class="is-pulled-left" v-if="config.themeOptions.footerText" :style="{ 'color': color('footerFontColor') }">
@@ -50,7 +57,8 @@
       return {
         isCalling: false,
         lastMessage: {},
-        messageQueue: []
+        messageQueue: [],
+        AscomURL: "static/images/"
       }
     },
     computed: {
