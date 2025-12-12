@@ -28,7 +28,7 @@
         <div class="anuncio" :style="{'color': 'white'}">
 
 <!--        <h3 v-if="config.themeOptions.anuncioTitulo" :style="{ 'background-color': color('sidebarBgColor'), 'color': color('sidebarFontColor') }">{{ config.themeOptions.anuncioTitulo }}</h3>-->
-            <img :src="AscomURL" alt="Espaço Anúncio" class="imagem-anuncio">
+            <img :src="images[0]" alt="Espaço Ascom" class="imagem-anuncio">
         </div>
         <!--        -->
         <footer :style="{ 'background-color': color('clockBgColor'), 'color': color('clockFontColor') }">
@@ -58,7 +58,13 @@
         isCalling: false,
         lastMessage: {},
         messageQueue: [],
-        AscomURL: 'static/images/anuncio_teste.jpg'
+
+        // AscomURL: 'static/images/anuncio_teste2.jpg',
+        images: [
+          'static/images/anuncio_teste1.jpg',
+          'static/images/anuncio_teste2.jpg',
+          'static/images/anuncio_teste3.jpg'
+        ]
       }
     },
     computed: {
@@ -109,12 +115,24 @@
         const peso = this.lastMessage.$data ? this.lastMessage.$data.peso : 0
         const suffix = peso > 0 ? 'Priority' : 'Normal'
         return this.config[prefix + suffix] || this.config[fallback + suffix]
+      },
+      // getImgUrl (im) {
+      //   return require('@/assets' + im)
+      // },
+      slide () {
+        let first = this.images.shift()
+        this.images = this.images.concat(first)
       }
     },
     watch: {
       message () {
         this.call()
       }
+    },
+    mounted () {
+      window.setInterval(() => {
+        this.slide()
+      }, 2000)
     }
   }
 </script>
@@ -165,12 +183,13 @@
 
     .history-column
       height: 100vh
+      width: 60vh
       >header
-        height: 50vh
+        height: 45vh
         padding: 1rem 0
 
       .anuncio
-        height: 30vh
+        height: 35vh
         display: flex
         justify-content: center
         align-items: center
@@ -179,7 +198,9 @@
         .imagem-anuncio
           max-width: 100%
           max-height: 100%
-          object-fit: contain 
+          object-fit: fill
+          min-width: 100%
+          min-height: 100%
       >footer
         height: 20vh
         padding: 1rem 0
