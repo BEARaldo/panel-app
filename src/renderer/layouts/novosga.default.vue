@@ -5,13 +5,6 @@
         <header class="column">
           <featured :message="lastMessage" v-if="lastMessage" :fontColor="color('featuredFontColor', 'pageFontColor')"></featured>
         </header>
-        <!--        Tentativa de inserção do anuncio-->
-        <div class="column is-full anuncio-ascom">
-            <h3 :style="{ 'color': color('pageFontColor') }">Anúncios</h3>
-
-            <img :src="AscomURL" alt="Espaço Ascom" class="imagem-anuncio">
-        </div>
-<!--        -->
         <footer class="column" :style="{ 'background-color': color('footerBgColor'), 'color': color('footerFontColor') }">
           <img :src="logoUrl" class="is-pulled-left">
           <h1 class="is-pulled-left" v-if="config.themeOptions.footerText" :style="{ 'color': color('footerFontColor') }">
@@ -31,6 +24,13 @@
             :fontColorPriority="config.historyFontColorPriority || config.sidebarFontColorPriority">
           </history>
         </header>
+        <!--        Tentativa de inserção do anuncio-->
+        <div class="anuncio" :style="{'color': 'white'}">
+
+<!--        <h3 v-if="config.themeOptions.anuncioTitulo" :style="{ 'background-color': color('sidebarBgColor'), 'color': color('sidebarFontColor') }">{{ config.themeOptions.anuncioTitulo }}</h3>-->
+            <img :src="AscomURL" alt="Espaço Anúncio" class="imagem-anuncio">
+        </div>
+        <!--        -->
         <footer :style="{ 'background-color': color('clockBgColor'), 'color': color('clockFontColor') }">
           <clock :locale="config.locale" :dateFormat="'date_format'|trans" :fontColor="color('clockFontColor')"></clock>
         </footer>
@@ -58,7 +58,7 @@
         isCalling: false,
         lastMessage: {},
         messageQueue: [],
-        AscomURL: "static/images/"
+        AscomURL: 'static/images/anuncio_teste.jpg'
       }
     },
     computed: {
@@ -166,8 +166,20 @@
     .history-column
       height: 100vh
       >header
-        height: 80vh
+        height: 50vh
         padding: 1rem 0
+
+      .anuncio
+        height: 30vh
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 1rem
+
+        .imagem-anuncio
+          max-width: 100%
+          max-height: 100%
+          object-fit: contain 
       >footer
         height: 20vh
         padding: 1rem 0
